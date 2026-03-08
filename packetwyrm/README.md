@@ -2,61 +2,76 @@
 A modern, Wireshark-like network packet analyzer with real-time capture, threat detection, and plain English explanations.
 
 PacketWyrmLicensePlatform
-
-Features
-🔴 Real-time packet capture from any network interface
-🔄 Switch interfaces on-the-fly without restart
-⚠️ Threat detection with risk scoring
-💡 Plain English explanations for all traffic
-📊 Protocol analytics with visual breakdown
-🔍 Advanced filtering by protocol, IP, or port
-💾 CSV export for further analysis
-📡 WebSocket streaming for real-time updates
-🎨 Modern dark UI inspired by cybersecurity tools
-Quick Start
-Prerequisites
-Docker & Docker Compose
-Linux (Kali, Ubuntu, Debian, etc.)
-Root/sudo access for packet capture
-Installation
-# Clone the repositorygit clone https://github.com/YOUR_USERNAME/packetwyrm.gitcd packetwyrm# Build and rundocker-compose up --build
-Access
-Open your browser: http://localhost:8080
-
-Manual Installation (without Docker)
+🚀 PacketWyrm - Quick Start Guide
+Requirements
+Linux (Kali, Ubuntu, Debian) with libpcap-dev
+Go 1.21+
+Node.js 18+ (for frontend)
+1️⃣ Clone & Build Backend
 bash
 
-# Install dependencies (Debian/Ubuntu/Kali)
-sudo apt install libpcap-dev
+# Install dependencies
+sudo apt update && sudo apt install -y libpcap-dev
+
+# Clone repository
+git clone https://github.com/YOUR_USERNAME/packetwyrm.git
+cd packetwyrm/packetwyrm-backend
 
 # Build
-cd backend
 go mod tidy
-CGO_ENABLED=1 go build -o packetwyrm .
+go build -o packetwyrm .
+2️⃣ Run Backend (requires root)
+bash
 
-# Run with root (required for packet capture)
 sudo ./packetwyrm
-Usage
-Select Interface - Choose network interface from dropdown
-Start/Stop Capture - Control packet capture
-Filter by Protocol - Click protocol buttons in sidebar
-Search - Enter IP address or keyword
-Inspect - Click any packet for detailed info
-Export - Download captured packets as CSV
-Threat Analysis - Red highlighted packets are potential threats
-Supported Protocols
-HTTP / HTTPS
-DNS
-TCP / UDP
-SSH
-ICMP
-ARP
-Threat Detection
-PacketWyrm automatically detects:
+You'll see:
 
-Traffic from blacklisted IPs (Tor exits, known malicious)
-Connections to suspicious ports (4444, 5555, etc.)
-External SSH attempts
-Unusual port scanning activity
-License
-MIT License - Free forever
+text
+
+🐉 PACKETWYRM - Network Packet Analyzer v2.0
+🚀 Server: http://localhost:8080
+📡 WebSocket: ws://localhost:8080/ws/packets
+3️⃣ Run Frontend
+Open a new terminal:
+
+bash
+
+cd packetwyrm
+npm install
+npm run dev
+Open browser: http://localhost:3000
+
+4️⃣ Start Capturing
+Select a network interface from dropdown
+Click ▶ Start button
+Watch packets flow in real-time!
+📋 One-Line Install (Kali/Linux)
+bash
+
+sudo apt install -y libpcap-dev && git clone https://github.com/YOUR_USERNAME/packetwyrm.git && cd packetwyrm/packetwyrm-backend && go mod tidy && go build -o packetwyrm . && sudo ./packetwyrm
+🛠️ Features
+Feature
+How to Use
+Filter by Protocol	Click protocol buttons (HTTP, DNS, TCP...)
+Search	Type IP, domain, or keyword in search box
+View Details	Click any packet row
+Hex Dump	Click "Hex" tab in details panel
+Stats	Click "📊 Stats" button
+Threats	Click "⚠️ Threats" button (shows alerts)
+Export	Click "💾 Export" for CSV download
+VirusTotal	Click "🛡️ VirusTotal" on suspicious packets
+
+⚡ Quick Test
+To test if it's working, open another terminal and generate traffic:
+
+bash
+
+# Generate DNS traffic
+nslookup google.com
+ping -c 3 8.8.8.8
+
+# Generate HTTP traffic
+curl https://www.google.com
+You should see packets appearing in the UI!
+
+That's it! 🐉
